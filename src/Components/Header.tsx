@@ -17,7 +17,7 @@ export const Header = () => {
                     <div className="header__cart">
                         <Button  cart>
                             <span>520 ₽</span>
-                            <div className="button__delimiter"></div>
+                            <div className="button__delimiter"/>
                             <svg
                                 width="18"
                                 height="18"

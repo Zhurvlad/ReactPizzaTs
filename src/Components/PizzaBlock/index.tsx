@@ -1,14 +1,18 @@
 import React from 'react';
+import index from "../../Redux/actions";
+
+import classNames  from 'classnames'
 
 interface PizzaProps {
     id: number,
     imageUrl: string,
     name: string,
-    types: [],
+    types: any[],
     price: any[],
     category: number,
     rating: number,
-    size: []
+    sizes: any[],
+    onAddToCart: any
 }
 
 
@@ -18,10 +22,41 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
                                                      category,
                                                      name,
                                                      price,
-                                                     size,
+                                                     sizes,
                                                      rating,
-                                                     types
+                                                     types,
+                                                     onAddToCart
+
                                                  }) => {
+    const availableSizes = [26, 30, 40]
+    const availableTypes = ['Тонкое', 'Традиционное']
+
+
+
+    const [activeType, setActiveType] = React.useState(types[0])
+    const [activeSize, setActiveSize] = React.useState(sizes[0])
+
+    const onSetActiveType = (index: number) => {
+        setActiveType(index)
+    }
+
+    const onSetActiveSize = (index: number) => {
+        setActiveSize(index)
+    }
+
+    const setOnAddToCart = () => {
+        const cartObj = {
+            imageUrl,
+            id,
+            name,
+            price,
+            sizes,
+            types,
+        }
+        onAddToCart(cartObj)
+    }
+
+
     return (
 
         <div className="pizza-block">
@@ -33,14 +68,27 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {availableTypes && availableTypes
+                        .map((pizzaType, index) => <li
+                            key={pizzaType + index}
+                            onClick={() => onSetActiveType(index)}
+                            className={classNames({
+                                'active': activeType === index,
+                                'disabled': !types.includes(index)
+                            })}>{pizzaType}</li>)}
+
                 </ul>
                 <ul>
-                    <li className="active">26 см.
-                    </li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {availableSizes && availableSizes
+                        .map((pizzaSize, index) => (
+                            <li
+                                key={pizzaSize + index}
+                                onClick={() => onSetActiveSize(pizzaSize)}
+                                className={classNames({
+                                    'active': activeSize === pizzaSize,
+                                    'disabled': !sizes.includes(pizzaSize)
+                                })}>{pizzaSize} см.</li>))}
+
                 </ul>
             </div>
             <div className="pizza-block__bottom">
@@ -58,7 +106,7 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
                             fill="white"
                         />
                     </svg>
-                    <span>Добавить</span>
+                    <span onClick={() => setOnAddToCart()}>Добавить</span>
                     <i>2</i>
                 </div>
             </div>

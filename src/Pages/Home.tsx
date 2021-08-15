@@ -27,10 +27,14 @@ const sort = [
 export const Home = () => {
     const {items, isLoading, error} = useTypedSelector(pizza => pizza.pizzas)
     const {category, popupObj} = useTypedSelector(filter => filter.filter)
-    const {fetchPizza, setCategory, setPopup} = UserPizzaActions()
+    const {fetchPizza, setCategory, setPopup, addToCart} = UserPizzaActions()
 
     const onSetCategory = (index:any) => {
         setCategory(index)
+    }
+
+    const onAddToCart = (cartObj: any) => {
+        addToCart(cartObj)
     }
 
     const onSetPopup = (sortObj:any) => {
@@ -41,7 +45,8 @@ export const Home = () => {
         fetchPizza(category, popupObj)
     }, [category, popupObj])
 
-console.log(category)
+
+
 
     return (
         <div className="container">
@@ -50,6 +55,7 @@ console.log(category)
                         categoryAdd={category}
                         onSetSelectCategory={onSetCategory}
                         category={categories}/>
+
                 <SortPopup
                     onSetPopup={onSetPopup}
                     popupObj={popupObj}
@@ -60,6 +66,8 @@ console.log(category)
                 {isLoading ? items && items.map((pizzaObj) =>
                     <PizzaBlock
                         {...pizzaObj}
+                        pizzaItems={items}
+                        onAddToCart={onAddToCart}
                         key={pizzaObj.id}/>
                 ):
                 Array(12).fill(0).map((obj,_) => (

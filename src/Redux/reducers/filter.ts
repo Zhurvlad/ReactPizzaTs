@@ -1,5 +1,5 @@
 import produce from "immer";
-import {PizzaAction, PizzaActionType, PizzaState} from "../../types/pizza";
+
 import {FilterState, FilterAction, FilterActionType} from "../../types/filter";
 
 

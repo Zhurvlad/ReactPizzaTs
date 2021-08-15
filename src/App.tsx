@@ -1,4 +1,7 @@
 import React from "react";
+
+import {Route} from 'react-router-dom'
+
 import {Header} from "./Components/Header";
 import {PizzaBlock} from "./Components/PizzaBlock";
 import {Home} from "./Pages/Home";
@@ -10,7 +13,7 @@ function App() {
             <div className="wrapper">
                 <Header/>
                 <div className="content">
-                    <Home/>
+                    <Route path={'/'} component={Home}/>
                 </div>
             </div>
         </div>

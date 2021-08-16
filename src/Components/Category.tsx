@@ -10,7 +10,6 @@ export const Category:React.FC<CategoryProps> = ({category, onSetSelectCategory,
 
 
     const onSetCategory = (index:any) => {
-
             onSetSelectCategory(index)
     }
 

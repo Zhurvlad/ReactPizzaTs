@@ -6,12 +6,13 @@ interface ButtonProps {
     cart?: boolean,
     outline?: boolean,
     circle?: boolean,
-    onClick?: any
+    onClick?: any,
+    className?: string
 }
 
-export const Button:React.FC<ButtonProps> = ({cart, children,  outline, circle, onClick}) => {
+export const Button:React.FC<ButtonProps> = ({cart, children,  outline, circle, onClick, className}) => {
     return (
-        <button onClick={onClick}  className={classNames('button', {
+        <button onClick={onClick}  className={classNames('button', className, {
             "button--cart" : cart,
             "button--outline" : outline,
             "button--circle": circle,

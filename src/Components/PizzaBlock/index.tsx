@@ -2,6 +2,8 @@ import React from 'react';
 import index from "../../Redux/actions";
 
 import classNames  from 'classnames'
+import {Button} from "../Button";
+import {func} from "prop-types";
 
 interface PizzaProps {
     id: number,
@@ -34,7 +36,7 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
 
 
     const [activeType, setActiveType] = React.useState(types[0])
-    const [activeSize, setActiveSize] = React.useState(sizes[0])
+    const [activeSize, setActiveSize] = React.useState(0)
 
     const onSetActiveType = (index: number) => {
         setActiveType(index)
@@ -49,9 +51,10 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
             imageUrl,
             id,
             name,
-            price,
-            sizes,
-            types,
+            price: price[activeSize],
+
+            type: availableTypes[activeType],
+            size: availableSizes[activeSize],
         }
         onAddToCart(cartObj)
     }
@@ -83,17 +86,17 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
                         .map((pizzaSize, index) => (
                             <li
                                 key={pizzaSize + index}
-                                onClick={() => onSetActiveSize(pizzaSize)}
+                                onClick={() => onSetActiveSize(index)}
                                 className={classNames({
-                                    'active': activeSize === pizzaSize,
+                                    'active': activeSize === index,
                                     'disabled': !sizes.includes(pizzaSize)
                                 })}>{pizzaSize} см.</li>))}
 
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {price[0]} ₽</div>
-                <div className="button button--outline button--add">
+                <div className="pizza-block__price">от {price[activeSize]} ₽</div>
+                <Button onClick={setOnAddToCart} className="button--add" outline>
                     <svg
                         width="12"
                         height="12"
@@ -106,9 +109,9 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
                             fill="white"
                         />
                     </svg>
-                    <span onClick={() => setOnAddToCart()}>Добавить</span>
+                    <span >Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
 

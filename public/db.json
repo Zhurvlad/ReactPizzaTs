@@ -16,7 +16,7 @@
       "name": "Чиззи чеддер \uD83E\uDDC0",
       "types": [0],
       "sizes": [26, 40],
-      "price": [395, 789],
+      "price": [395, null, 789],
       "category": 1,
       "rating": 6
     },
@@ -26,7 +26,7 @@
       "name": "Цезарь",
       "types": [0,1],
       "sizes": [26, 40],
-      "price": [450, 739],
+      "price": [450, null, 739],
       "category": 1,
       "rating": 4
     },
@@ -66,7 +66,7 @@
       "name": "Карбонара",
       "types": [0, 1],
       "sizes": [26, 40],
-      "price": [400, 699],
+      "price": [400, null, 699],
       "category": 1,
       "rating": 9
     },
@@ -96,7 +96,7 @@
       "name": "Додо",
       "types": [0, 1],
       "sizes": [26, 30],
-      "price": [620, 770],
+      "price": [620, 770, null],
       "category": 4,
       "rating": 7
     },
@@ -106,7 +106,7 @@
       "name": "Нежный лосось",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": [495, 595, 800],
+      "price": [440, 595, 800],
       "category": 3,
       "rating": 7
     },
@@ -116,7 +116,7 @@
       "name": "Мясная",
       "types": [0, 1],
       "sizes": [26, 40],
-      "price": [420, 750],
+      "price": [420, null, 750],
       "category": 0,
       "rating": 7
     }

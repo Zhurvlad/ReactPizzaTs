@@ -4,7 +4,7 @@ import {Category} from "../Components/Category";
 import {SortPopup} from "../Components/SortPopup";
 import {useSelector} from "react-redux";
 import {useTypedSelector} from "../Components/hooks/useTypedSelector";
-import {UserPizzaActions} from "../Components/hooks/UseActions";
+import {DispatchPizzaActions} from "../Components/hooks/UseActions";
 import LoadingBlock from "../Components/PizzaBlock/LoadingBlock";
 
 
@@ -27,7 +27,7 @@ const sort = [
 export const Home = () => {
     const {items, isLoading, error} = useTypedSelector(pizza => pizza.pizzas)
     const {category, popupObj} = useTypedSelector(filter => filter.filter)
-    const {fetchPizza, setCategory, setPopup, addToCart} = UserPizzaActions()
+    const {fetchPizza, setCategory, setPopup, addToCart, clearCart} = DispatchPizzaActions()
 
     const onSetCategory = (index:any) => {
         setCategory(index)

@@ -13,21 +13,11 @@ export const SortPopup: React.FC<SortProps> = ({sort, onSetPopup,
 
     const sortRef = useRef(null)
 
-
-    console.log(popupObj, 2)
-
-    const onSetCategory = (index: number) => {
-
-        setVisible(false)
-    }
-
     const handleOutsideClick = (e: any) => {
        if(!e.path.includes(sortRef.current)){
            setVisible(false)
         }
     }
-
-
 
     const toggleVisiblePopup = () => {
         setVisible(!visible)

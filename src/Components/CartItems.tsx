@@ -1,23 +1,37 @@
 import React from "react";
+import {Button} from "./Button";
 
 interface CartProps {
     name: string,
+    type: string,
+    size: number,
+    price: number,
+    imageUrl: string,
+    pizzaCount:number
+    pizzaPrice: number,
+    onRemovePizza: any,
+    id: number
 }
 
 
-export const CartItems:React.FC<CartProps> = ({name}) => {
+export const CartItems:React.FC<CartProps> = ({id, name, type, size , price, imageUrl, pizzaCount, pizzaPrice, onRemovePizza}) => {
+
+    const handleRemovePizza = () => {
+     onRemovePizza(id)
+    }
+
     return (
         <div className="cart__item">
             <div className="cart__item-img">
                 <img
                     className="pizza-block__image"
-                    src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-                    alt="Pizza"
+                    src={imageUrl}
+                        alt="Pizza"
                 />
             </div>
             <div className="cart__item-info">
-                <h3>123123</h3>
-                <p>тонкое тесто, 26 см.</p>
+                <h3>{name}</h3>
+                <p>{type} тесто, {size} см.</p>
             </div>
             <div className="cart__item-count">
                 <div className="button button--outline button--circle cart__item-count-minus">
@@ -32,7 +46,7 @@ export const CartItems:React.FC<CartProps> = ({name}) => {
                     </svg>
 
                 </div>
-                <b>2</b>
+                <b>{pizzaCount}</b>
                 <div className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -47,10 +61,10 @@ export const CartItems:React.FC<CartProps> = ({name}) => {
                 </div>
             </div>
             <div className="cart__item-price">
-                <b>770 ₽</b>
+                <b>{pizzaPrice} ₽</b>
             </div>
-            <div className="cart__item-remove">
-                <div className="button button--outline button--circle">
+            <div  className="cart__item-remove">
+                <Button onClick={handleRemovePizza} outline circle>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -61,7 +75,7 @@ export const CartItems:React.FC<CartProps> = ({name}) => {
                             fill="#EB5A1E"/>
                     </svg>
 
-                </div>
+                </Button>
             </div>
         </div>
     )

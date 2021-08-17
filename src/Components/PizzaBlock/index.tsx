@@ -1,9 +1,9 @@
 import React from 'react';
-import index from "../../Redux/actions";
+
 
 import classNames  from 'classnames'
 import {Button} from "../Button";
-import {func} from "prop-types";
+
 
 interface PizzaProps {
     id: number,
@@ -11,23 +11,21 @@ interface PizzaProps {
     name: string,
     types: any[],
     price: any[],
-    category: number,
-    rating: number,
     sizes: any[],
-    onAddToCart: any
+    onAddToCart: any,
+    pizzaCount: number
 }
 
 
 export const PizzaBlock: React.FC<PizzaProps> = ({
                                                      imageUrl,
                                                      id,
-                                                     category,
                                                      name,
                                                      price,
                                                      sizes,
-                                                     rating,
                                                      types,
-                                                     onAddToCart
+                                                     onAddToCart,
+                                                     pizzaCount
 
                                                  }) => {
     const availableSizes = [26, 30, 40]
@@ -52,7 +50,6 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
             id,
             name,
             price: price[activeSize],
-
             type: availableTypes[activeType],
             size: availableSizes[activeSize],
         }
@@ -110,7 +107,7 @@ export const PizzaBlock: React.FC<PizzaProps> = ({
                         />
                     </svg>
                     <span >Добавить</span>
-                    <i>2</i>
+                    {pizzaCount && <i>{pizzaCount}</i>}
                 </Button>
             </div>
         </div>

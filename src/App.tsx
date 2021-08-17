@@ -3,7 +3,6 @@ import React from "react";
 import {Route} from 'react-router-dom'
 
 import {Header} from "./Components/Header";
-import {PizzaBlock} from "./Components/PizzaBlock";
 import {Home} from "./Pages/Home";
 import Cart from "./Pages/Cart";
 

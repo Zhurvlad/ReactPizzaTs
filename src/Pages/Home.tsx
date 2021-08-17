@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {PizzaBlock} from "../Components/PizzaBlock";
 import {Category} from "../Components/Category";
 import {SortPopup} from "../Components/SortPopup";
-import {useSelector} from "react-redux";
 import {useTypedSelector} from "../Components/hooks/useTypedSelector";
 import {DispatchPizzaActions} from "../Components/hooks/UseActions";
 import LoadingBlock from "../Components/PizzaBlock/LoadingBlock";
@@ -25,13 +24,16 @@ const sort = [
 
 
 export const Home = () => {
-    const {items, isLoading, error} = useTypedSelector(pizza => pizza.pizzas)
+    const {items, isLoading} = useTypedSelector(pizza => pizza.pizzas)
     const {category, popupObj} = useTypedSelector(filter => filter.filter)
-    const {fetchPizza, setCategory, setPopup, addToCart, clearCart} = DispatchPizzaActions()
+    const {fetchPizza, setCategory, setPopup, addToCart} = DispatchPizzaActions()
+    const cartItems:any = useTypedSelector(({cart}) => cart.items)
 
     const onSetCategory = (index:any) => {
         setCategory(index)
     }
+
+
 
     const onAddToCart = (cartObj: any) => {
         addToCart(cartObj)
@@ -66,6 +68,7 @@ export const Home = () => {
                 {isLoading ? items && items.map((pizzaObj) =>
                     <PizzaBlock
                         {...pizzaObj}
+                        pizzaCount={cartItems[pizzaObj.id] && cartItems[pizzaObj.id].items.length}
                         pizzaItems={items}
                         onAddToCart={onAddToCart}
                         key={pizzaObj.id}/>

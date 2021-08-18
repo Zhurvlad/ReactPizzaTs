@@ -9,14 +9,14 @@ export function clearCart():CartAction {
     return { type:CartActionType.CLEAR_CART}
 }
 
-export function MinusPizza(id:number) {
+export function minusPizza(id:number) {
     return { type: CartActionType.MINUS_PIZZA, payload: id}
 }
 
-export function PlusPizza(id:number) {
+export function plusPizza(id:number) {
     return {type: CartActionType.PLUS_PIZZA, payload: id}
 }
 
-export function RemovePizza(id: number) {
+export function removePizza(id: number) {
     return {type: CartActionType.REMOVE_PIZZA, payload: id}
 }

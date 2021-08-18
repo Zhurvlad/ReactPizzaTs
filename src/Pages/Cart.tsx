@@ -10,7 +10,7 @@ import EmptySVG from '../assets/img/empty-cart.png'
 
 function Cart() {
 
-    const {clearCart, RemovePizza} = DispatchPizzaActions()
+    const {clearCart, removePizza, minusPizza, plusPizza} = DispatchPizzaActions()
     const {items, totalCount, totalPrice} = useTypedSelector(({cart}) => cart)
 
     //Из объекта получаем ключи по item и по ключу вытаскиваем первый объект(пиццу) из массива
@@ -27,8 +27,20 @@ function Cart() {
 
     const onRemovePizza = (id: number) => {
         if (window.confirm('Вы действительно хотите удалить пиццу?')) {
-            RemovePizza(id)
+            removePizza(id)
         }
+    }
+
+    const onPlusPizza = (id:number) => {
+        plusPizza(id)
+    }
+
+    const onMinusPizza = (id:number) => {
+        minusPizza(id)
+    }
+
+    const onOrderPizza = () => {
+        console.log('Ваш заказ', items)
     }
 
 
@@ -83,6 +95,8 @@ function Cart() {
                                             pizzaCount={items[cartObj.id] && items[cartObj.id].items.length}
                                             pizzaPrice={items[cartObj.id].pizzaPrice && items[cartObj.id].pizzaPrice}
                                             onRemovePizza={onRemovePizza}
+                                            onPlusPizza={onPlusPizza}
+                                            onMinusPizza={onMinusPizza}
                                             key={cartObj + index}
                                             {...cartObj}/>))}
 
@@ -107,28 +121,26 @@ function Cart() {
                                             </Link>
                                         </Button>
 
-                                        <div className="button pay-btn">
+                                        <Button onClick={onOrderPizza}  className="pay-btn">
                                             <span>Оплатить сейчас</span>
-                                        </div>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
-                            : <div className="wrapper">
-
-                                <div className="cart cart--empty">
-                                    <h2>Корзина пустая <i>😕</i></h2>
-                                    <p>
-                                        Вероятней всего, вы не заказывали ещё пиццу.<br/>
-                                        Для того, чтобы заказать пиццу, перейди на главную страницу.
-                                    </p>
-                                    <img src={EmptySVG} alt="Empty cart"/>
-                                    <Link to={'/'}>
-                                        <Button className="button button--black">
-                                            <span>За покупками</span>
-                                        </Button>
-                                    </Link>
-                                </div>
+                            : <div className="cart cart--empty">
+                                <h2>Корзина пустая <i>😕</i></h2>
+                                <p>
+                                    Вероятней всего, вы не заказывали ещё пиццу.<br/>
+                                    Для того, чтобы заказать пиццу, перейди на главную страницу.
+                                </p>
+                                <img src={EmptySVG} alt="Empty cart"/>
+                                <Link to={'/'}>
+                                    <Button className="button button--black">
+                                        <span>За покупками</span>
+                                    </Button>
+                                </Link>
                             </div>
+
                         }
                     </div>
                 </div>

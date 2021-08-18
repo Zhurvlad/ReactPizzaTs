@@ -44,7 +44,9 @@ export const Home = () => {
     }
 
     useEffect(() => {
+
         fetchPizza(category, popupObj)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category, popupObj])
 
 

@@ -10,14 +10,35 @@ interface CartProps {
     pizzaCount:number
     pizzaPrice: number,
     onRemovePizza: any,
-    id: number
+    id: number,
+    onMinusPizza:any,
+    onPlusPizza:any
 }
 
 
-export const CartItems:React.FC<CartProps> = ({id, name, type, size , price, imageUrl, pizzaCount, pizzaPrice, onRemovePizza}) => {
+export const CartItems:React.FC<CartProps> = ({
+                                                  id,
+                                                  name,
+                                                  type,
+                                                  size ,
+                                                  price,
+                                                  imageUrl,
+                                                  pizzaCount,
+                                                  pizzaPrice,
+                                                  onRemovePizza,
+                                                  onMinusPizza,
+                                                  onPlusPizza
+                                                    }) => {
 
     const handleRemovePizza = () => {
      onRemovePizza(id)
+    }
+
+    const handlePlusPizza = () => {
+        onPlusPizza(id)
+    }
+    const handleMinusPizza = () => {
+        onMinusPizza(id)
     }
 
     return (
@@ -34,7 +55,7 @@ export const CartItems:React.FC<CartProps> = ({id, name, type, size , price, ima
                 <p>{type} тесто, {size} см.</p>
             </div>
             <div className="cart__item-count">
-                <div className="button button--outline button--circle cart__item-count-minus">
+                <div onClick={handleMinusPizza} className="button button--outline button--circle cart__item-count-minus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -47,7 +68,7 @@ export const CartItems:React.FC<CartProps> = ({id, name, type, size , price, ima
 
                 </div>
                 <b>{pizzaCount}</b>
-                <div className="button button--outline button--circle cart__item-count-plus">
+                <div onClick={handlePlusPizza} className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
